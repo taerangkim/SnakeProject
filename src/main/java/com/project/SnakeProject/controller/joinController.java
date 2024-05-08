@@ -13,7 +13,8 @@ public class joinController {
     @Autowired
     private MemberService memberService;
     @GetMapping("join")
-    public String join(){
+    public String join(Model model){
+        model.addAttribute("title", "개인약관동의");
         return "content/join";
     }
 
