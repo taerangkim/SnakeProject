@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>회원가입</title>
+    <title th:text="${title}"></title>
     <link th:href="@{/assets/css/join2.css}" rel="stylesheet">
 </head>
 <body>
@@ -9,19 +9,19 @@
 <br>
 <br>
 <div class="member">
-    <form action="/joinProcess.do" method="post">
+    <form action="/join2" method="post">
         <!-- 필드 -->
         <div class="field">
             <b>아이디</b>
             <span class="placehold-text">
-            <input type="text" placeholder="아이디" id="MemberId" class="userId">
+                <input type="text" placeholder="아이디" name="memberId" class="userId">
             </span>
             <div id="idMsg" class="error-message" style="display: none"></div>
         </div>
 
         <div class="field">
             <b>비밀번호</b>
-            <input class="userpw" id="MemberPw" type="password" placeholder="비밀번호">
+            <input class="userpw" name="memberPw" type="password" placeholder="비밀번호">
         </div>
 
         <div class="field">
@@ -33,11 +33,11 @@
         <div class="field">
             <b>이름</b>
             <div class="name-container">
-                <input type="text" placeholder="이름" id="MemberName" class="name-input">
+                <input type="text" placeholder="이름" name="memberName" class="name-input">
                 <div class="gender1">
-                    <select id="MemberSex">
-                        <option value="남자">남자</option>
-                        <option value="여자">여자</option>
+                    <select name="memberSex">
+                        <option value="0">남자</option>
+                        <option value="1" selected>여자</option>
                     </select>
                 </div>
             </div>
@@ -45,33 +45,33 @@
 
         <div class="field">
             <b>전화번호</b>
-            <input type="tel" id="MemberPhone" maxlength="11" placeholder="전화번호">
+            <input type="tel" name="memberPhone" maxlength="11" placeholder="전화번호">
         </div>
 
         <!-- (생년월일) -->
-        <div class="field birth">
-            <b>생년월일</b>
-            <div>
-                <input type="number" placeholder="년(4자)" maxlength="4">
-                <select>
-                    <option value="">월</option>
-                    <option th:each="i : ${#numbers.sequence(1,12)}" th:value="${i}">
-                        <span th:value="${i}" th:text="${i}+월"></span>
-                    </option>
-                </select>
-                <select>
-                    <option value="">일</option>
-                    <option th:each="i : ${#numbers.sequence(1,31)}" th:value="${i}">
-                        <span th:text="${i}+일"></span>
-                    </option>
-                </select>
-            </div>
-        </div>
+<!--        <div class="field birth">-->
+<!--            <b>생년월일</b>-->
+<!--            <div>-->
+<!--                <input type="number" placeholder="년(4자)" maxlength="4">-->
+<!--                <select>-->
+<!--                    <option value="">월</option>-->
+<!--                    <option th:each="i : ${#numbers.sequence(1,12)}" th:value="${i}">-->
+<!--                        <span th:value="${i}" th:text="${i}+월"></span>-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--                <select>-->
+<!--                    <option value="">일</option>-->
+<!--                    <option th:each="i : ${#numbers.sequence(1,31)}" th:value="${i}">-->
+<!--                        <span th:text="${i}+일"></span>-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <!-- 가입하기 버튼 -->
 <!--        <input type="button" id="join" class="join" value="가입하기">-->
-        <a href="/">가입하기</a>
-<!--        <input type="submit" id="join" class="join" value="가입하기">-->
+<!--        <a href="/">가입하기</a>-->
+        <input type="submit" id="join" class="join" value="가입하기">
     </form>
 </div>
 

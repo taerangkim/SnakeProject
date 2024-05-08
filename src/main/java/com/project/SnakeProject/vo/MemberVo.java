@@ -1,26 +1,18 @@
 package com.project.SnakeProject.vo;
 
-import java.util.Date;
-
 public class MemberVo {
-    private int MIdx, MemberSex;
-    private String MemberId, MemberPw, MemberName, MemberPhone;
-    private Date MRegDate;
+    private String MemberId;
+    private String MemberPw;
+    private String MemberName;
+    private String MemberSex;
+    private String MemberPhone;
 
-    public int getMIdx() {
-        return MIdx;
-    }
-
-    public void setMIdx(int MIdx) {
-        this.MIdx = MIdx;
-    }
-
-    public int getMemberSex() {
-        return MemberSex;
-    }
-
-    public void setMemberSex(int memberSex) {
-        MemberSex = memberSex;
+    public MemberVo(String memberId, String memberPw, String memberName, String memberSex, String memberPhone) {
+        this.MemberId = memberId;
+        this.MemberPw = memberPw;
+        this.MemberName = memberName;
+        this.MemberSex = memberSex;
+        this.MemberPhone = memberPhone;
     }
 
     public String getMemberId() {
@@ -46,6 +38,13 @@ public class MemberVo {
     public void setMemberName(String memberName) {
         MemberName = memberName;
     }
+    public String getMemberSex() {
+        return MemberSex;
+    }
+
+    public void setMemberSex(String memberSex) {
+        MemberSex = memberSex;
+    }
 
     public String getMemberPhone() {
         return MemberPhone;
@@ -54,14 +53,4 @@ public class MemberVo {
     public void setMemberPhone(String memberPhone) {
         MemberPhone = memberPhone;
     }
-
-    public Date getMRegDate() {
-        return MRegDate;
-    }
-
-    public void setMRegDate(Date MRegDate) {
-        this.MRegDate = MRegDate;
-    }
-
-
 }

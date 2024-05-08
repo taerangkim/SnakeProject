@@ -26,6 +26,8 @@
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory" />
     </bean>
+
+    <mybatis-spring:scan base-package="com.project.SnakeProject.mapper" />
 </beans>
 
         <!--        <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="SqlSessionFactory">-->
@@ -34,4 +36,3 @@
         <!--            <property value="classpath:/mapper/*Mapper.xml" name="mapperLocations" />-->
         <!--        </bean>-->
 
-        <!--        <mybatis-spring:scan base-package="com.project.SnakeProject.mapper" />-->
