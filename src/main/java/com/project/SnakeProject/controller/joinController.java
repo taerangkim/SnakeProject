@@ -31,8 +31,12 @@ public class joinController {
             model.addAttribute("msg", "회원가입이 완료되었습니다.");
             model.addAttribute("url", "/");
             return "content/alert";
+        } else {
+            model.addAttribute("msg", "회원가입에 실패했습니다.");
+            model.addAttribute("url", "/join2");
+            return "content/alert";
         }
-        return "content/join2";
+//        return "content/join2";
     }
 }
 

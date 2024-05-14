@@ -63,8 +63,25 @@ a{
 .error-message{
     color: red;
 }
+
+.error-message1{
+    color: red;
+}
+
+.id-container {
+    display: flex;
+}
+
+.id1 {
+    flex:3;
+}
 .name-container {
     display: flex;
+}
+
+.userId {
+    flex: 7;
+    margin-right: 5px;
 }
 
 .name-input {
