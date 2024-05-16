@@ -20,4 +20,7 @@
             #{MemberPhone}
         )
     </insert>
+    <select id="selectId" resultType="boolean">
+        SELECT COUNT(*) FROM tbl_member where MemberId = #{MemberId}
+    </select>
 </mapper>
