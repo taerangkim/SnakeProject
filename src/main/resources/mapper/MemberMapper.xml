@@ -23,4 +23,7 @@
     <select id="selectId" resultType="boolean">
         SELECT COUNT(*) FROM tbl_member where MemberId = #{MemberId}
     </select>
+    <select id="login" resultType="String">
+        select MemberName from tbl_member where MemberId = #{MemberId} and MemberPw = #{MemberPw}
+    </select>
 </mapper>

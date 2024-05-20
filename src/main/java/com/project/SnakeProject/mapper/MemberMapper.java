@@ -8,4 +8,5 @@ import org.apache.ibatis.annotations.Param;
 public interface MemberMapper {
     public int addMember(MemberVo memberVo);
     public boolean selectId(String Id);
+    public String login(MemberVo memberVo);
 }

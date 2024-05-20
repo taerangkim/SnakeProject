@@ -14,8 +14,11 @@ public class MemberService {
         return memberMapper.addMember(memberVo);
     }
 
-
     public boolean selectId(String id) {
         return memberMapper.selectId(id);
+    }
+
+    public String login(MemberVo memberVo) {
+        return memberMapper.login(memberVo);
     }
 }

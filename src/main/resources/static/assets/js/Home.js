@@ -23,6 +23,7 @@ roomPictures.forEach(function(roomPicture) {
 
 const seatButtonEl = document.querySelector('section.why-us .container .buttonGroup .seatButton');
 const roomButtonEl = document.querySelector('section.why-us .container .buttonGroup .roomButton');
+
 const roomsEl = document.querySelector('section.why-us .container .rooms');
 const seatEl = document.querySelector('section.why-us .container .seats');
 
