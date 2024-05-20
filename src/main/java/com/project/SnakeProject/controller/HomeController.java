@@ -23,11 +23,10 @@ public class HomeController {
     public String home(MemberVo memberVo, Model model, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         String name = memberService.login(memberVo, session);
-        session.setAttribute("username",name);
         if(name != null) {
+            session.setAttribute("username",name);
             model.addAttribute("msg", name + "님 로그인이 완료되었습니다.");
             model.addAttribute("url", "/");
-            model.addAttribute("name", name);
 
             return "content/alert";
         } else {
