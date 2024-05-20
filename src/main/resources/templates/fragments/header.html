@@ -2,6 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <th:block th:fragment="headerFragment">
         <script defer src="/assets/js/header.js"></script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            const msg = [[${msg}]]
+            if(msg != null) {
+                alert(msg);
+            }
+        </script>
         <div id="topbar" class="d-flex align-items-center fixed-top">
             <div class="container d-flex justify-content-between">
                 <div class="contact-info d-flex align-items-center">
@@ -28,12 +35,9 @@
                         <li><a class="nav-link scrollto" id="detail" href="detail">정보</a></li>
                         <li><a class="nav-link scrollto" id="messageBoard" href="messageBoard">게시판</a></li>
 <!--                        <li><a class="nav-link scrollto" id="messageBoard" href="messageBoard">어서오세요 ㄱㄱㄱ님.</a></li>-->
-                        <th:block th:if="${memberName == null}">
-                            <li><button type="button" id="appointment-btn" class="appointment-btn scrollto">로그인/회원가입</button></li>
-                        </th:block>
-                        <th:block th:if="${memberName != null}">
-                            <li th:text="${memberName}"></li>
-                        </th:block>
+
+                        <li th:if="${session.username == null}"><button type="button" id="appointment-btn" class="appointment-btn scrollto">로그인/회원가입</button></li>
+                        <li th:if="${session.username != null}"><span th:text="${session.username}"></span></li>
 
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
