@@ -2,8 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/layout}"
->
+      layout:decorate="~{fragments/layout}">
 <head>
   <title th:text="${title}"></title>
 </head>
@@ -13,123 +12,32 @@
             <h2>메뉴 가격</h2>
         </div>
         <div class="choice-title-kind">
-            <h3 class="ticket">시간제 당일 이용권</h3>
+            <h3 class="ticket" th:text="${type1}"></h3>
         </div>
         <div class="container-detail2 text-center">
             <div class="row g-2">
-                <div class="col-6">
+                <div class="col-6" th:each="List : ${selectList1}">
                     <div class="p-3">
                         <div class="container-info">
-                            <span class="time">1시간</span>
+                            <span class="time" th:text="${List.getSIPName()}"></span>
                             <div class="separator"></div>
-                            <span class="price">2,000원</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="p-3">
-                        <div class="container-info">
-                            <span class="time">1시간</span>
-                            <div class="separator"></div>
-                            <span class="price">2,000원</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="p-3">
-                        <div class="container-info">
-                            <span class="time">1시간</span>
-                            <div class="separator"></div>
-                            <span class="price">2,000원</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="p-3">
-                        <div class="container-info">
-                            <span class="time">1시간</span>
-                            <div class="separator"></div>
-                            <span class="price">2,000원</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="p-3">
-                        <div class="container-info">
-                            <span class="time">1시간</span>
-                            <div class="separator"></div>
-                            <span class="price">2,000원</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="p-3">
-                        <div class="container-info">
-                            <span class="time">1시간</span>
-                            <div class="separator"></div>
-                            <span class="price">2,000원</span>
+                            <span class="price" th:text="${List.getSIPPrice()} + 원"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="choice-title-kind">
-            <h3 class="ticket">시간제 당일 이용권</h3>
+            <h3 class="ticket" th:text="${type2}"></h3>
         </div>
         <div class="container-detail2 text-center">
             <div class="row g-2">
-                <div class="col-6">
+                <div class="col-6" th:each="List : ${selectList2}">
                     <div class="p-3">
                         <div class="container-info">
-                            <span class="time">1시간</span>
+                            <span class="time" th:text="${List.getSIPName()}"></span>
                             <div class="separator"></div>
-                            <span class="price">2,000원</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="p-3">
-                        <div class="container-info">
-                            <span class="time">1시간</span>
-                            <div class="separator"></div>
-                            <span class="price">2,000원</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="p-3">
-                        <div class="container-info">
-                            <span class="time">1시간</span>
-                            <div class="separator"></div>
-                            <span class="price">2,000원</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="p-3">
-                        <div class="container-info">
-                            <span class="time">1시간</span>
-                            <div class="separator"></div>
-                            <span class="price">2,000원</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="p-3">
-                        <div class="container-info">
-                            <span class="time">1시간</span>
-                            <div class="separator"></div>
-                            <span class="price">2,000원</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="p-3">
-                        <div class="container-info">
-                            <span class="time">1시간</span>
-                            <div class="separator"></div>
-                            <span class="price">2,000원</span>
+                            <span class="price" th:text="${List.getSIPPrice()} + 원"></span>
                         </div>
                     </div>
                 </div>
