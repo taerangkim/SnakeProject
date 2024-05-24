@@ -27,7 +27,7 @@ public class HomeController {
             session.setAttribute("username",name);
             model.addAttribute("msg", name + "님 로그인이 완료되었습니다.");
             model.addAttribute("url", "/");
-
+            // test
             return "content/alert";
         } else {
             model.addAttribute("msg", "아이디가 맞지 않거나 회원정보가 없습니다.");
