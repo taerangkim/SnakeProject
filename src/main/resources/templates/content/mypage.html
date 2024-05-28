@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Info Page</title>`
+</head>
+<th:block layout:fragment="content">
+    <div class="container-mypage-detail">
+        <div class="row">
+            <div class="col-4 sub_wrap">
+                <!-- 왼쪽메뉴 -->
+                <div class="lnb_sec line">
+                    <h1>마이페이지</h1>
+                    <ul class="lnbnew">
+                        <li class="mypageBtn active"><a href="javascript:void(0);">개인정보수정</a></li>
+                        <li class="mytimeBtn active"><a href="javascript:void(0);">잔여시간확인</a></li>
+                        <li class="mywriteBtn active"><a href="javascript:void(0)">작성한 글 확인</a></li>
+                        <li><button type="button" id="deletebtn" class="deletebtn">회원 탈퇴</button></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 개인정보수정 -->
+            <div class="col-8 mypage">
+                <form class="sign-form">
+                    <h1 class="title">개인정보 수정</h1>
+                        <div class="form-group">
+                            <label>아이디</label>
+                            <input type="text"  class="form-control" style="width: 500px;" th:value="${session.userId}" disabled >
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>이름</label>
+                            <input type="text" class="form-control" style="width: 500px;" th:value="${session.username}" disabled>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>비밀번호 변경</label>
+                            <input type="password" class="form-control" style="width: 500px;">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>비밀번호 확인</label>
+                            <input type="password" class="form-control" style="width: 500px;">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>전화번호</label>
+                            <input type="number" class="form-control" style="width: 500px;" disabled>
+                        </div>
+                        <br>
+                        <div class="form-group1">
+                            <div class="date">
+                                <label>가입일자</label>
+                                <input type="number" class="form-control date" style="width: 300px;" disabled>
+                            </div>
+                            <div class="gender2">
+                                <label>성별</label>
+                                <input type="text" class="form-control gender" style="width: 197px;" disabled>
+                            </div>
+                        </div>
+                        <br>
+                    <input type="submit" id="update" class="btn-lightblue update" value="수정하기">
+                </form>
+            </div>
+
+            <!-- 잔여시간확인 -->
+            <div class="col-8 mytime">
+                <table class="table-fill">
+                    <thead>
+                    <tr>
+                        <th scope="col">개인 좌석 잔여 시간</th>
+                        <th scope="col">룸 대여 잔여 시간</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class=""> ---- 시간</td>
+                        <td class=""> ---- 시간</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href ="#" class="charge">시간 충전하기</a>
+                        </td>
+                        <td>
+                            <a href ="#" class="charge">시간 충전하기</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 작성한 글 확인 -->
+            <div class="col-8 mytest">
+                <div class="row" id="item">
+                    <div class="col-6 mywrite">
+                        <div class="topleft">
+                            <a href="/">
+                                <h4>글 제목</h4>
+                            </a>
+                            <ul class="write1">
+                                <li>작성자 : test</li>
+                                <li>작성 날짜 : test</li>
+                                <li>카테고리 : test</li>
+                                <li>별점 : test</li>
+                            </ul>
+                        </div>
+                        <div class="bottomleft">
+                            <a href="/">
+                                <h4>글 제목</h4>
+                            </a>
+                            <ul class="write1">
+                                <li>작성자 : test</li>
+                                <li>작성 날짜 : test</li>
+                                <li>카테고리 : test</li>
+                                <li>별점 : test</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6 mywrite">
+                        <div class="topright">
+                            <a href="/">
+                                <h4>글 제목</h4>
+                            </a>
+                            <ul class="write1">
+                                <li>작성자 : test</li>
+                                <li>작성 날짜 : test</li>
+                                <li>카테고리 : test</li>
+                                <li>별점 : test</li>
+                            </ul>
+                        </div>
+                        <div class="bottomright">
+                            <a href="/">
+                                <h4>글 제목</h4>
+                            </a>
+                            <ul class="write1">
+                                <li>작성자 : test</li>
+                                <li>작성 날짜 : test</li>
+                                <li>카테고리 : test</li>
+                                <li>별점 : test</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="mypaging">-->
+<!--                    <i class="fa-solid fa-angles-left" id="first_page"></i>-->
+<!--                    <i class="fa-solid fa-angle-left" id="prev_page"></i>-->
+<!--                    <div class="pages">-->
+<!--                        <span class="active">1</span>-->
+<!--                        <span>2</span>-->
+<!--                        <span>3</span>-->
+<!--                        <span>4</span>-->
+<!--                        <span>5</span>-->
+<!--                    </div>-->
+<!--                    <i class="fa-solid fa-angle-right" id="next_page"></i>-->
+<!--                    <i class="fa-solid fa-angles-right" id="last_page"></i>-->
+<!--                </div>-->
+                <div class="pagination" id="pagination"></div>
+            </div>
+        </div>
+    </div>
+
+        <!-- 회원탈퇴 -->
+        <div class="modal fade" id="modaldel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">회원 탈퇴</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <b>JAVA 스터디에서 test님의 계정이 완전히 삭제합니다.</b><br>
+                    <b>탈퇴 시 개인정보및 이용정보가 모두 삭제되며 복구할 수 없습니다.</b><br>
+                    <b>본인의 비밀번호를 입력 한 후 동의함 버튼을 체크해주세요.</b><br>
+                    <br>
+                    <div class="chkpass">
+                    <b>비밀번호 확인</b>
+                    <input type="password" class="passwrd">
+                    </div>
+                    <small>본인인증을 위해 비밀번호를 입력하세요.</small>
+                    <br>
+                    <div class="chkk">
+                        <b>동의함</b>
+                        <input type="checkbox" id="check" class="check">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="">
+                    <input type="button" value="회원 탈퇴하기" id="delbtn" class="delbtn">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        const mypageBtn = document.querySelector(".mypageBtn");
+        const mytimeBtn = document.querySelector(".mytimeBtn");
+        const mywriteBtn = document.querySelector(".mywriteBtn");
+
+
+        const mypage = document.querySelector(".mypage");
+        const mytime = document.querySelector(".mytime");
+        const mywrite = document.querySelector(".mywrite");
+
+        const mytest = document.querySelector(".mytest");
+
+        $(document).ready(function () {
+
+            mytime.style.display = "none";
+            mytest.style.display = "none";
+
+            mypageBtn.addEventListener('click', function () {
+
+                mytimeBtn.classList.remove('active')
+                mywriteBtn.classList.remove('active')
+                mypageBtn.classList.add('active')
+
+                mypage.style.display = "block";
+                mytime.style.display = "none";
+                mytest.style.display = "none";
+            })
+
+            mytimeBtn.addEventListener('click', function () {
+
+                mypageBtn.classList.remove('active')
+                mywriteBtn.classList.remove('active')
+                mytimeBtn.classList.add('active')
+
+                mytime.style.display = "block";
+                mypage.style.display = "none";
+                mytest.style.display = "none";
+            })
+
+            mywriteBtn.addEventListener('click', function () {
+
+                mypageBtn.classList.remove('active')
+                mytimeBtn.classList.remove('active')
+                mywriteBtn.classList.add('active')
+
+                mytest.style.display = "block";
+                mypage.style.display = "none";
+                mytime.style.display = "none";
+            })
+        })
+
+        // 회원탈퇴 모달
+        $("#deletebtn").click(function () {
+            $("#modaldel").modal("show");
+        });
+
+        //동의함 체크
+        const delbtn = document.getElementById('delbtn');
+        const checkboxes = document.querySelectorAll('.check');
+
+        delbtn.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            let agreeChecked = true;
+
+            checkboxes.forEach(function (checkbox) {
+                if (!checkbox.checked) {
+                    agreeChecked = false;
+                }
+            });
+
+            if (agreeChecked) {
+                location.href = '/';
+            } else {
+                alert('동의함을 체크해주세요.');
+            }
+        });
+    </script>
+
+</th:block>
+</html>
+

@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
+
 
 @Service
 public class MemberService {
@@ -27,6 +29,11 @@ public class MemberService {
         }
         return name;
     }
+
+//    public String login(MemberVo memberVo, HttpSession session) {
+////        String id1 = memberMapper.login(id, name, memberVo);
+//        return memberMapper.login(memberVo, session);
+//    }
     public void logout(HttpSession session){
         session.invalidate();
     }

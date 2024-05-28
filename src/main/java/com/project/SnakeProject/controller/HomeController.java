@@ -28,7 +28,6 @@ public class HomeController {
             model.addAttribute("msg", name + "님 로그인이 완료되었습니다.");
             model.addAttribute("url", "/");
             // test
-            // 백지민 깃허브 테스트
             return "content/alert";
         } else {
             model.addAttribute("msg", "아이디가 맞지 않거나 회원정보가 없습니다.");
