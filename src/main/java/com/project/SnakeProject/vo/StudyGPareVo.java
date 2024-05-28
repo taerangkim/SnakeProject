@@ -1,15 +1,13 @@
 package com.project.SnakeProject.vo;
 
 public class StudyGPareVo {
-    int SGPIdx;
-    int SGIIdx;
-    String SGPName;
-    int SGPPrice;
-    String SGIContent;
+    private int SGPIdx;
+    private int SGIIdx;
+    private String SGPName;
+    private int SGPPrice;
+    private String SGIContent;
 
-    public StudyGPareVo(int SGPIdx, int SGIIdx, String SGPName, int SGPPrice, String SGIContent) {
-        this.SGPIdx = SGPIdx;
-        this.SGIIdx = SGIIdx;
+    public StudyGPareVo(String SGPName, int SGPPrice, String SGIContent) {
         this.SGPName = SGPName;
         this.SGPPrice = SGPPrice;
         this.SGIContent = SGIContent;

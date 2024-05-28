@@ -11,14 +11,20 @@
 
     <select id="selectList1" resultType="com.project.SnakeProject.vo.StudyInPareVo">
         select
-            REGEXP_REPLACE(sipname, '\(.+\)') as sipname1, sipprice from tbl_studyinpare where sipname like '%당일%'
+            REGEXP_REPLACE(sipname, '\(.+\)') as sipname1, sipprice
+        from tbl_studyinpare where sipname like '%당일%'
     </select>
     <select id="selectList2" resultType="com.project.SnakeProject.vo.StudyInPareVo">
         select
-            REGEXP_REPLACE(sipname, '\(.+\)') as sipname1, sipprice from tbl_studyinpare where sipname like '%정기%'
+            REGEXP_REPLACE(sipname, '\(.+\)') as sipname1, sipprice
+        from tbl_studyinpare where sipname like '%정기%'
     </select>
     <select id="selectList3" resultType="com.project.SnakeProject.vo.StudyGPareVo">
-        select tsgp.*, tsgi.sgicontent1 as sgicontent from tbl_studygpare tsgp
-             left outer join tbl_studyginfo tsgi on tsgi.sgiidx = tsgp.sgiidx
+        select
+            tsgp.SGPName as sgpname,
+            tsgp.SGPPrice as sgpprice,
+            tsgi.SGIContent1 as SGIContent
+        from tbl_studygpare tsgp
+            left outer join tbl_studyginfo tsgi on tsgi.sgiidx = tsgp.sgiidx
     </select>
 </mapper>
