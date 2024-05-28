@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Member;
+import java.util.Map;
 
 
 @Service
@@ -22,19 +23,14 @@ public class MemberService {
     }
 
     public String login(MemberVo memberVo, HttpSession session) {
-        String name = memberMapper.login(memberVo);
-        if(name != null) {
-            session.setAttribute("userId", memberVo.getMemberId());
-            session.setAttribute("username", name);
-        }
-        return name;
+        return memberMapper.login(memberVo);
     }
 
-//    public String login(MemberVo memberVo, HttpSession session) {
-////        String id1 = memberMapper.login(id, name, memberVo);
-//        return memberMapper.login(memberVo, session);
-//    }
-    public void logout(HttpSession session){
-        session.invalidate();
+    public MemberVo selectInfo(String id) {
+        return memberMapper.selectInfo(id);
+    }
+
+    public int updateInfo(MemberVo member) {
+        return memberMapper.updateInfo(member);
     }
 }

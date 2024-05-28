@@ -15,50 +15,60 @@
                     <h1>마이페이지</h1>
                     <ul class="lnbnew">
                         <li class="mypageBtn active"><a href="javascript:void(0);">개인정보수정</a></li>
-                        <li class="mytimeBtn active"><a href="javascript:void(0);">잔여시간확인</a></li>
+                        <li class="mytimeBtn active"><a href="javascript:void(0);">시간 확인 및 충전</a></li>
                         <li class="mywriteBtn active"><a href="javascript:void(0)">작성한 글 확인</a></li>
-                        <li><button type="button" id="deletebtn" class="deletebtn">회원 탈퇴</button></li>
+                        <li>
+                            <a href="javascript:show()">회원 탈퇴</a>
+<!--                            <button type="button" id="deletebtn" class="deletebtn">회원 탈퇴</button>-->
+                        </li>
                     </ul>
                 </div>
             </div>
 
             <!-- 개인정보수정 -->
             <div class="col-8 mypage">
-                <form class="sign-form">
+                <form th:action="@{/MemberUpdate(id=${session.userid})}" method="post" name="checkform" class="sign-form" onsubmit="return validateForm()">
                     <h1 class="title">개인정보 수정</h1>
                         <div class="form-group">
                             <label>아이디</label>
-                            <input type="text"  class="form-control" style="width: 500px;" th:value="${session.userId}" disabled >
+                            <input type="text" name="memberId" class="form-control" style="width: 500px;" th:value="${session.userid}" disabled>
                         </div>
                         <br>
                         <div class="form-group">
                             <label>이름</label>
-                            <input type="text" class="form-control" style="width: 500px;" th:value="${session.username}" disabled>
+                            <input type="text" name="memberName"  class="form-control" style="width: 500px;" th:value="${data.getMemberName()}" >
+                            <div id="nameMsg" class="error-message"></div>
                         </div>
                         <br>
                         <div class="form-group">
                             <label>비밀번호 변경</label>
-                            <input type="password" class="form-control" style="width: 500px;">
+                            <input type="password" name="memberPw" class="userpw form-control" style="width: 500px;" th:value="${data.getMemberPw()}">
+                            <div id="pwMsg" class="error-message"></div>
                         </div>
                         <br>
                         <div class="form-group">
                             <label>비밀번호 확인</label>
-                            <input type="password" class="form-control" style="width: 500px;">
+                            <input type="password" name="memberconPw" class="userpw-confirm form-control" style="width: 500px;" th:value="${data.getMemberPw()}">
+                            <div id="pwcheckMsg" class="error-message1"></div>
                         </div>
                         <br>
                         <div class="form-group">
                             <label>전화번호</label>
-                            <input type="number" class="form-control" style="width: 500px;" disabled>
+                            <input type="tel" name="memberPhone" class="phone form-control" style="width: 500px;" maxlength="11"
+                                   th:value="${data.getMemberPhone()}">
+                            <div id="phoneMsg" class="error-message"></div>
                         </div>
                         <br>
                         <div class="form-group1">
                             <div class="date">
                                 <label>가입일자</label>
-                                <input type="number" class="form-control date" style="width: 300px;" disabled>
+                                <input type="text" class="form-control date" style="width: 300px;"
+                                       th:value="${#dates.format(data.getMregDate(), 'yyyy-MM-dd')}" disabled>
                             </div>
                             <div class="gender2">
                                 <label>성별</label>
-                                <input type="text" class="form-control gender" style="width: 197px;" disabled>
+                                <input type="text" class="form-control gender" style="width: 197px;"
+                                       th:value="${data.getMemberSex() == 0 ? '남자' : '여자'}" disabled>
                             </div>
                         </div>
                         <br>
@@ -144,20 +154,15 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="mypaging">-->
-<!--                    <i class="fa-solid fa-angles-left" id="first_page"></i>-->
-<!--                    <i class="fa-solid fa-angle-left" id="prev_page"></i>-->
-<!--                    <div class="pages">-->
-<!--                        <span class="active">1</span>-->
-<!--                        <span>2</span>-->
-<!--                        <span>3</span>-->
-<!--                        <span>4</span>-->
-<!--                        <span>5</span>-->
-<!--                    </div>-->
-<!--                    <i class="fa-solid fa-angle-right" id="next_page"></i>-->
-<!--                    <i class="fa-solid fa-angles-right" id="last_page"></i>-->
-<!--                </div>-->
-                <div class="pagination" id="pagination"></div>
+                <div class="btn-section">
+                    <button type="button" class="btn btn-light btn-before" onclick="firstActive()"><i class="bi bi-chevron-double-left"></i></button>
+                    <button type="button" class="btn btn-light btn-before" onclick="beforeActive()"><i class="bi bi-chevron-left"></i></button>
+                    <div class="btn-group" id="btn-group" role="group" aria-label="Second group">
+
+                    </div>
+                    <button type="button" class="btn btn-light btn-next" onclick="nextActive()"><i class="bi bi-chevron-right"></i></button>
+                    <button type="button" class="btn btn-light btn-next" onclick="lastActive()"><i class="bi bi-chevron-double-right"></i></button>
+                </div>
             </div>
         </div>
     </div>
@@ -171,20 +176,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <b>JAVA 스터디에서 test님의 계정이 완전히 삭제합니다.</b><br>
-                    <b>탈퇴 시 개인정보및 이용정보가 모두 삭제되며 복구할 수 없습니다.</b><br>
-                    <b>본인의 비밀번호를 입력 한 후 동의함 버튼을 체크해주세요.</b><br>
+                    <b>
+                        JAVA 스터디에서 "<th:block th:text="${session.username}"></th:block>" 님의 계정이 완전히 삭제합니다.<br>
+                        탈퇴 시 개인정보및 이용정보가 모두 삭제되며 복구할 수 없습니다.<br>
+                        본인의 비밀번호를 입력 한 후 동의함 버튼을 체크해주세요.
+                    </b>
                     <br>
-                    <div class="chkpass">
-                    <b>비밀번호 확인</b>
-                    <input type="password" class="passwrd">
-                    </div>
-                    <small>본인인증을 위해 비밀번호를 입력하세요.</small>
                     <br>
-                    <div class="chkk">
-                        <b>동의함</b>
-                        <input type="checkbox" id="check" class="check">
-                    </div>
+                    <form action="/deleteMember" method="post">
+                        <div class="chkpass">
+                            <b>비밀번호 확인</b>
+                            <input type="password" class="passwrd" name="memberPw">
+                        </div>
+                        <small>본인인증을 위해 비밀번호를 입력하세요.</small>
+                        <br>
+                        <div class="chkk">
+                            <b>동의함</b>
+                            <input type="checkbox" id="check" class="check">
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <div class="">
@@ -255,10 +265,11 @@
             })
         })
 
-        // 회원탈퇴 모달
-        $("#deletebtn").click(function () {
+
+        function show() {
             $("#modaldel").modal("show");
-        });
+        }
+        // 회원탈퇴 모달
 
         //동의함 체크
         const delbtn = document.getElementById('delbtn');
@@ -281,6 +292,63 @@
                 alert('동의함을 체크해주세요.');
             }
         });
+
+        function validateForm() {
+            const f = document.checkform;
+
+            const pwMsg = document.getElementById("pwMsg");
+            const pwcheckMsg = document.getElementById("pwcheckMsg");
+            const nameMsg = document.getElementById("nameMsg");
+            const phoneMsg = document.getElementById("phoneMsg");
+
+            if (f.memberName.value == "") {
+                nameMsg.textContent = "이름은 필수 입력 사항입니다.";
+                f.memberName.focus();
+                return false;
+            } else {
+                nameMsg.style.display = "none";
+            }
+
+            if (f.memberPw.value == "") {
+                pwMsg.textContent = "비밀번호는 필수 입력 사항입니다.";
+                f.memberPw.focus();
+                pwcheckMsg.textContent = "";
+                return false;
+            } else if (f.memberPw.value != f.memberconPw.value) {
+                pwcheckMsg.textContent = "비밀번호가 일치하지 않습니다.";
+                f.memberconPw.focus();
+                pwMsg.textContent = "";
+                return false;
+            } else {
+                pwMsg.textContent = "";
+                pwcheckMsg.textContent = "";
+            }
+
+            if (f.memberPhone.value == "") {
+                phoneMsg.textContent = "전화번호는 필수 입력 사항입니다.";
+                f.memberPhone.focus();
+                return false;
+            } else {
+                phoneMsg.style.display = "none";
+            }
+        }
+
+        function checkPassword() {
+            var password = document.querySelector('.userpw').value;
+            var confirmPassword = document.querySelector('.userpw-confirm').value;
+            var errorMessage = document.querySelector('.error-message1');
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "비밀번호가 일치하지 않습니다.";
+                document.querySelector('.userpw').focus();
+            } else {
+                // 비밀번호가 일치하면 오류 메시지를 지움
+                errorMessage.textContent = "";
+            }
+        }
+
+        // 비밀번호 확인 함수를 비밀번호 재확인 입력란의 이벤트에 연결
+        document.querySelector('.userpw-confirm').addEventListener('blur', checkPassword);
     </script>
 
 </th:block>
