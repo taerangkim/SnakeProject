@@ -24,6 +24,6 @@ public class StudyPareService {
     };
     public List<StudyGPareVo> selectList3() {
         return mapper.selectList3();
-    }
+    };
 
 }
