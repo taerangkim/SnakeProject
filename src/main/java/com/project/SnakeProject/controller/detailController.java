@@ -1,11 +1,9 @@
 package com.project.SnakeProject.controller;
 
-import com.project.SnakeProject.mapper.StudyInPareMapper;
-import com.project.SnakeProject.service.StudyInPareService;
-import com.project.SnakeProject.vo.BoardVo;
+import com.project.SnakeProject.service.StudyPareService;
+import com.project.SnakeProject.vo.StudyGPareVo;
 import com.project.SnakeProject.vo.StudyInPareVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,17 +15,19 @@ import java.util.List;
 public class detailController {
 
     @Autowired
-    private StudyInPareService studyInPareService;
+    private StudyPareService studyPareService;
 
     @GetMapping("/detail")
-    public String detail(Model model) {
+    public String detail(Model model) throws Exception {
         List<StudyInPareVo> typeList = new ArrayList<>();
         List<StudyInPareVo> selectList1 = new ArrayList<>();
         List<StudyInPareVo> selectList2 = new ArrayList<>();
+        List<StudyGPareVo> selectList3 = new ArrayList<>();
 
-        typeList.addAll(studyInPareService.typeList());
-        selectList1.addAll(studyInPareService.selectList1());
-        selectList2.addAll(studyInPareService.selectList2());
+        typeList.addAll(studyPareService.typeList());
+        selectList1.addAll(studyPareService.selectList1());
+        selectList2.addAll(studyPareService.selectList2());
+        selectList3.addAll(studyPareService.selectList3());
 
         String type1 = typeList.get(0).getSIPName();
         String type2 = typeList.get(1).getSIPName();
@@ -36,6 +36,7 @@ public class detailController {
         model.addAttribute("type2", type2);
         model.addAttribute("selectList1", selectList1);
         model.addAttribute("selectList2", selectList2);
+        model.addAttribute("selectList3", selectList3);
 
         model.addAttribute("title", "요금정보");
         return "content/detail";

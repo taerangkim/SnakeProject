@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-<mapper namespace="com.project.SnakeProject.mapper.StudyInPareMapper">
+<mapper namespace="com.project.SnakeProject.mapper.StudyPareMapper">
     <select id="typeList" resultType="com.project.SnakeProject.vo.StudyInPareVo">
         select distinct CONCAT(
                                 REPLACE(
@@ -16,5 +16,9 @@
     <select id="selectList2" resultType="com.project.SnakeProject.vo.StudyInPareVo">
         select
             REGEXP_REPLACE(sipname, '\(.+\)') as sipname1, sipprice from tbl_studyinpare where sipname like '%정기%'
+    </select>
+    <select id="selectList3" resultType="com.project.SnakeProject.vo.StudyGPareVo">
+        select tsgp.*, tsgi.sgicontent1 as sgicontent from tbl_studygpare tsgp
+             left outer join tbl_studyginfo tsgi on tsgi.sgiidx = tsgp.sgiidx
     </select>
 </mapper>

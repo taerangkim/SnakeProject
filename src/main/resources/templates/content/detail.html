@@ -51,9 +51,18 @@
             <div class="col-6">
                 <div class="p-3">
                     <div class="container-info">
-                        <span class="time">1시간</span>
+                        <span class="time">tttt</span>
                         <div class="separator"></div>
-                        <span class="price">2,000원</span>
+                        <span class="price">tttt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6" th:each="List1 : ${selectList3}">
+                <div class="p-3">
+                    <div class="container-info">
+                        <span class="time" th:text="${List1.getSGIContent()()}"></span>
+                        <div class="separator"></div>
+                        <span class="price" th:text="${List1.getSGPName()} + '-' + ${List1.getSGPPrice()}"></span>
                     </div>
                 </div>
             </div>
