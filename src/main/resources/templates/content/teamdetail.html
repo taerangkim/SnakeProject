@@ -354,6 +354,10 @@
             const priceElement = document.querySelector('.price').innerText;
             let modalContent = "";
 
+            let selectedDateFormatted = null;
+            let firstSelectedHour = null;
+            let lastSelectedHour = null;
+
             // 라디오 버튼 선택 여부 확인
             const timeReservationRadio = document.getElementById('time_reservation');
             if (!timeReservationRadio.checked) { // 라디오 버튼 클릭 안했을때
@@ -387,10 +391,10 @@
                 document.querySelector('.modal-footer .btn-primary').style.display = 'none';
                 document.querySelector('.modal-footer .check').style.display = 'block';
             } else { // 모두 다 선택 했을 때
-                const selectedDateFormatted = toDay.getFullYear() + '-' + autoLeftPad((toDay.getMonth() + 1), 2) + '-' + autoLeftPad(selectedDay, 2);
+                selectedDateFormatted = toDay.getFullYear() + '-' + autoLeftPad((toDay.getMonth() + 1), 2) + '-' + autoLeftPad(selectedDay, 2);
                 // 선택된 시간 중 첫 번째와 마지막 시간 추출
-                const firstSelectedHour = autoLeftPad(selectedHours[0], 2);
-                const lastSelectedHour = autoLeftPad(selectedHours[selectedHours.length - 1] + 1, 2);
+                firstSelectedHour = autoLeftPad(selectedHours[0], 2);
+                lastSelectedHour = autoLeftPad(selectedHours[selectedHours.length - 1] + 1, 2);
                 modalContent = `
                     <p>날짜: ${selectedDateFormatted}</p>
                     <p>시간:  ${firstSelectedHour}시 ~ ${lastSelectedHour}시</p>

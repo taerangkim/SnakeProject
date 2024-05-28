@@ -6,6 +6,9 @@ if(currentURL.includes('messageBoard') || currentURL.includes('post') || current
 } else if(currentURL.includes('detail')) {
   const detailEl = document.querySelector('#detail');
   detailEl.classList.add('active');
+} else if(currentURL.includes('mypage')){
+  const mypageEl = document.querySelector('#mypage');
+  mypageEl.classList.add('active');
 } else {
   const homeEl = document.querySelector('#home');
   homeEl.classList.add('active');

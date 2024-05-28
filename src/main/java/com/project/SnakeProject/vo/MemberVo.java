@@ -1,5 +1,8 @@
 package com.project.SnakeProject.vo;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class MemberVo {
     private String MemberId;
     private String MemberPw;
