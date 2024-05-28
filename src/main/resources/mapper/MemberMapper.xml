@@ -26,4 +26,15 @@
     <select id="login" resultType="String">
         select MemberName from tbl_member where MemberId = #{MemberId} and MemberPw = #{MemberPw}
     </select>
+    <select id="selectInfo" resultType="com.project.SnakeProject.vo.MemberVo">
+        select * from tbl_member where MemberId = #{MemberId}
+    </select>
+    <update id="updateInfo" parameterType="map">
+        update tbl_member set
+            MemberPw = #{MemberPw},
+            MemberName = #{MemberName},
+            MemberPhone = #{MemberPhone}
+        where MemberId = #{MemberId}
+    </update>
+
 </mapper>
