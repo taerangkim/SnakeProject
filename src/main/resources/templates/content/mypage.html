@@ -92,10 +92,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href ="#" class="charge">시간 충전하기</a>
+                            <a href ="javascript:chargeshow1()" class="charge">시간 충전하기</a>
                         </td>
                         <td>
-                            <a href ="#" class="charge">시간 충전하기</a>
+                            <a href ="javascript:chargeshow2()" class="charge">시간 충전하기</a>
                         </td>
                     </tr>
                     </tbody>
@@ -106,9 +106,10 @@
             <div class="col-8 mytest">
                 <div class="row" id="item">
                     <div class="col-6 mywrite">
-                        <div class="topleft">
+                        <div class="writecontent">
                             <a href="/">
                                 <h4>글 제목</h4>
+
                             </a>
                             <ul class="write1">
                                 <li>작성자 : test</li>
@@ -117,7 +118,9 @@
                                 <li>별점 : test</li>
                             </ul>
                         </div>
-                        <div class="bottomleft">
+                    </div>
+                    <div class="col-6 mywrite">
+                        <div class="writecontent">
                             <a href="/">
                                 <h4>글 제목</h4>
                             </a>
@@ -130,7 +133,7 @@
                         </div>
                     </div>
                     <div class="col-6 mywrite">
-                        <div class="topright">
+                        <div class="writecontent">
                             <a href="/">
                                 <h4>글 제목</h4>
                             </a>
@@ -141,7 +144,9 @@
                                 <li>별점 : test</li>
                             </ul>
                         </div>
-                        <div class="bottomright">
+                    </div>
+                    <div class="col-6 mywrite">
+                        <div class="writecontent">
                             <a href="/">
                                 <h4>글 제목</h4>
                             </a>
@@ -167,8 +172,8 @@
         </div>
     </div>
 
-        <!-- 회원탈퇴 -->
-        <div class="modal fade" id="modaldel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- 회원탈퇴 modal -->
+    <div class="modal fade" id="modaldel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -199,6 +204,82 @@
                 <div class="modal-footer">
                     <div class="">
                     <input type="button" value="회원 탈퇴하기" id="delbtn" class="delbtn">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 개인 시간 충전 modal -->
+    <div class="modal fade" id="modalcharge1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">회원 탈퇴</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <b>
+                        JAVA 스터디에서 "<th:block th:text="${session.username}"></th:block>" 님의 계정이 완전히 삭제합니다.<br>
+                        탈퇴 시 개인정보및 이용정보가 모두 삭제되며 복구할 수 없습니다.<br>
+                        본인의 비밀번호를 입력 한 후 동의함 버튼을 체크해주세요.
+                    </b>
+                    <br>
+                    <br>
+                    <form action="/deleteMember" method="post">
+                        <div class="chkpass">
+                            <b>비밀번호 확인</b>
+                            <input type="password" class="passwrd" name="memberPw">
+                        </div>
+                        <small>본인인증을 위해 비밀번호를 입력하세요.</small>
+                        <br>
+                        <div class="chkk">
+                            <b>동의함</b>
+                            <input type="checkbox" id="check" class="check">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="">
+                        <input type="button" value="회원 탈퇴하기" id="delbtn" class="delbtn">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 룸 modal -->
+    <div class="modal fade" id="modalcharge2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">회원 탈퇴</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <b>
+                        JAVA 스터디에서 "<th:block th:text="${session.username}"></th:block>" 님의 계정이 완전히 삭제합니다.<br>
+                        탈퇴 시 개인정보및 이용정보가 모두 삭제되며 복구할 수 없습니다.<br>
+                        본인의 비밀번호를 입력 한 후 동의함 버튼을 체크해주세요.
+                    </b>
+                    <br>
+                    <br>
+                    <form action="/deleteMember" method="post">
+                        <div class="chkpass">
+                            <b>비밀번호 확인</b>
+                            <input type="password" class="passwrd" name="memberPw">
+                        </div>
+                        <small>본인인증을 위해 비밀번호를 입력하세요.</small>
+                        <br>
+                        <div class="chkk">
+                            <b>동의함</b>
+                            <input type="checkbox" id="check" class="check">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="">
+                        <input type="button" value="회원 탈퇴하기" id="delbtn" class="delbtn">
                     </div>
                 </div>
             </div>
@@ -264,12 +345,6 @@
                 mytime.style.display = "none";
             })
         })
-
-
-        function show() {
-            $("#modaldel").modal("show");
-        }
-        // 회원탈퇴 모달
 
         //동의함 체크
         const delbtn = document.getElementById('delbtn');
@@ -349,6 +424,21 @@
 
         // 비밀번호 확인 함수를 비밀번호 재확인 입력란의 이벤트에 연결
         document.querySelector('.userpw-confirm').addEventListener('blur', checkPassword);
+
+        // 회원탈퇴 모달
+        function show() {
+            $("#modaldel").modal("show");
+        }
+
+        // 회원탈퇴 모달
+        function chargeshow1() {
+            $("#modalcharge1").modal("show");
+        }
+
+        // 회원탈퇴 모달
+        function chargeshow2() {
+            $("#modalcharge2").modal("show");
+        }
     </script>
 
 </th:block>

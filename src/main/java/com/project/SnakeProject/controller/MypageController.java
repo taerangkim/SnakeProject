@@ -17,11 +17,19 @@ public class MypageController {
     private MemberService memberService;
 
     @RequestMapping(value="/mypage", method = RequestMethod.GET)
-    public String mypage(String id, Model model) throws Exception {
-        MemberVo member = memberService.selectInfo(id);
-        model.addAttribute("data", member);
+    public String mypage(String id, Model model, HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("userid") != null) {
+            MemberVo member = memberService.selectInfo(id);
+            model.addAttribute("data", member);
 
-        return "content/mypage";
+            return "content/mypage";
+        } else {
+            model.addAttribute("msg", "비정상 접근입니다.");
+            model.addAttribute("url", "/");
+            return "content/alert";
+
+        }
     }
     @PostMapping("/MemberUpdate")
 //    @RequestMapping(value="/MemberUpdate/{id}", method = RequestMethod.POST)

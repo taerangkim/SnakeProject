@@ -244,33 +244,22 @@ li {
     /*text-align: center;*/
 }
 
-.topleft > a > h4 {
-    border-bottom: 1px solid lightgray;
-    /*width: 350px;*/
-    /*height: 60px;*/
-    text-align: center;
-    padding: 10px;
-}
-
-.bottomleft > a > h4 {
+.writecontent > a > h4 {
     border-bottom: 1px solid lightgray;
     padding: 10px;
+    margin-left: 45px;
     text-align: center;
 }
 
-.topright > a > h4 {
-    border-bottom: 1px solid lightgray;
-    text-align: center;
-    padding: 10px;
+.write1 {
+    margin-left: 10px;
 }
 
-.bottomright > a > h4 {
-    border-bottom: 1px solid lightgray;
-    text-align: center;
-    padding: 10px;
-}
+/*.writecontent > a > h4 {*/
 
-.topright, .topleft, .bottomright, .bottomleft {
+/*}*/
+
+.writecontent {
     height: 300px;
     margin-right: 50px;
 }

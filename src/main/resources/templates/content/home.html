@@ -40,8 +40,8 @@
                   </div>
                   -->
                 <div class="buttonGroup">
-                    <button type="button" class="btn btn-lg btn-outline-secondary roomButton active">스터디룸</button>
-                    <button type="button" class="btn btn-lg btn-outline-secondary seatButton ">개인</button>
+                    <button type="button" class="btn btn-lg btn-outline-secondary seatButton active">개인</button>
+                    <button type="button" class="btn btn-lg btn-outline-secondary roomButton ">스터디룸</button>
                 </div>
                 <div class="col-lg-12 seats">
                     <div class="seatContainer">
@@ -55,66 +55,21 @@
                                 <small class="small">사용중인 자리</small>
                             </li>
                         </ul>
-                        <div class="seatContainer">
-                            <div class="row">
-                                <span class="seat selectedSeat" id="seat1"></span>
-                                <span class="seat" id="seat2"></span>
-                                <span class="seat" id="seat3"></span>
-                                <span class="seat selectedSeat" id="seat4"></span>
-                                <span class="seat" id="seat5"></span>
-                                <span class="seat" id="seat6"></span>
-                                <!--                            <span class="seat" id="seat7">테스트</span>-->
-                                <!--                            <span class="seat" id="seat8"></span>-->
-                            </div>
-                            <div class="row">
-                                <span class="seat" id="seat9"></span>
-                                <span class="seat" id="seat10"></span>
-                                <span class="seat" id="seat11"></span>
-                                <span class="seat selectedSeat" id="seat12"></span>
-                                <span class="seat" id="seat13"></span>
-                                <span class="seat" id="seat14"></span>
-                                <!--                            <span class="seat" id="seat15"></span>-->
-                                <!--                            <span class="seat" id="seat16"></span>-->
-                            </div>
-                            <div class="row">
-                                <span class="seat" id="seat17"></span>
-                                <span class="seat" id="seat18"></span>
-                                <span class="seat" id="seat19"></span>
-                                <span class="seat" id="seat20"></span>
-                                <span class="seat" id="seat21"></span>
-                                <span class="seat" id="seat22"></span>
-                                <!--                            <span class="seat" id="seat23"></span>-->
-                                <!--                            <span class="seat" id="seat24"></span>-->
-                            </div>
-                            <div class="row">
-                                <span class="seat" id="seat25"></span>
-                                <span class="seat" id="seat26"></span>
-                                <span class="seat" id="seat27"></span>
-                                <span class="seat" id="seat28"></span>
-                                <span class="seat" id="seat29"></span>
-                                <span class="seat" id="seat30"></span>
-                                <!--                            <span class="seat" id="seat31"></span>-->
-                                <!--                            <span class="seat" id="seat32"></span>-->
-                            </div>
-                            <div class="row">
-                                <span class="seat" id="seat33"></span>
-                                <span class="seat" id="seat34"></span>
-                                <span class="seat" id="seat35"></span>
-                                <span class="seat" id="seat36"></span>
-                                <span class="seat" id="seat37"></span>
-                                <span class="seat" id="seat38"></span>
-                                <!--                            <span class="seat" id="seat39"></span>-->
-                                <!--                            <span class="seat" id="seat40"></span>-->
-                            </div>
-                            <div class="row">
-                                <span class="seat" id="seat41"></span>
-                                <span class="seat" id="seat42"></span>
-                                <span class="seat" id="seat43"></span>
-                                <span class="seat" id="seat44"></span>
-                                <span class="seat" id="seat45"></span>
-                                <span class="seat" id="seat46"></span>
-                                <!--                            <span class="seat" id="seat47"></span>-->
-                                <!--                            <span class="seat" id="seat48"></span>-->
+                        <div class="seatContainer" th:if="${ViewStudyInInfo != null}">
+                            <!--                            이런문법은 세상에 존재하지 않는것인가? 왜 실행이 안되는것일까?-->
+                            <!--                            <div th:each="group : ${#lists.partition(ViewStudyInInfo, 6)}" class="row">-->
+                            <!--                                <div th:text="${group}"></div>-->
+                            <!--                                <th:block th:each="studyInInfo : ${group}">-->
+                            <!--                                    <span class="seat" th:id="${studyInInfo.SIINum}" data-bs-toggle="modal" data-bs-target="#exampleModal"></span>-->
+                            <!--                                </th:block>-->
+                            <!--                            넘어오는 데이터 확인 한것(2차원 배열로 넘어옴)-->
+                            <!--                            <div th:text="${ViewStudyInInfo}"></div>-->
+                            <div class="row" th:each="studyInInfogroup : ${ViewStudyInInfo}">
+                                <th:block th:each="studyInInfo : ${studyInInfogroup}">
+                                    <span th:class="${studyInInfo.SeatUseState} == 'Y' ? 'seat selectedSeat' : 'seat' "
+                                          th:id="'seat' + ${studyInInfo.SIINum}"
+                                          data-bs-toggle="modal" data-bs-target="#exampleModal"></span>
+                                </th:block>
                             </div>
                         </div>
                         <p class="text">
@@ -127,48 +82,17 @@
                 <div class="col-lg-12 align-items-stretch rooms">
                     <div class="icon-boxes d-flex flex-column justify-content-center">
                         <div class="row">
-                            <div class="col-xl-3 d-flex align-items-stretch">
+                            <div class="col-xl-3 d-flex align-items-stretch" th:each="StudyGInfo : ${ViewStudyGInfo}">
                                 <a href="/teamdetail">
-                                    <div class="icon-box mt-4 mt-xl-0 roomPicture1">
+                                    <div th:id="'roomPicture' + ${StudyGInfo.SGINum}" class="icon-box mt-4 mt-xl-0">
                                         <!--                      <i class="bx bx-receipt"></i>-->
-                                        <img src="/assets/img/studyRoom/study%20room1.png" alt="스터드룸1 사진">
-                                        <h4>스터디룸 1번</h4>
-                                        <p>스터디룸은 학습이나 작업을 위한 전용 공간으로, 개별이나 그룹으로 사용될 수 있는 공간입니다.
+                                        <th:block th:each="StudyGImg : ${ViewStudyGImg}">
+                                            <img th:if="${StudyGImg.SGIIdx == StudyGInfo.SGIIdx}" th:src="${StudyGImg.SGImg}" src="" alt="스터드룸 사진">
+                                        </th:block>
+                                        <h4 th:text="${StudyGInfo.SGIContent1}">스터디룸 1번</h4>
+                                        <p th:text="${StudyGInfo.SGIContent2}">스터디룸은 학습이나 작업을 위한 전용 공간으로, 개별이나 그룹으로 사용될 수 있는 공간입니다.
                                             주로 조용하고 집중하기 좋은 환경을 제공하여 학업이나 업무에 집중할 수 있도록 돕습니다.</p>
                                         <!--                      <a href="#" type="button" class="btn btn-light">버튼</a>-->
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-xl-3 d-flex align-items-stretch">
-                                <a href="/teamdetail">
-                                    <div class="icon-box mt-4 mt-xl-0 roomPicture2">
-                                        <!--                      <i class="bx bx-cube-alt"></i>-->
-                                        <img src="/assets/img/studyRoom/study%20room2.png" alt="스터드룸2 사진">
-                                        <h4>스터디룸 2번</h4>
-                                        <p>스터디룸은 학습이나 작업을 위한 전용 공간으로, 개별이나 그룹으로 사용될 수 있는 공간입니다.
-                                            주로 조용하고 집중하기 좋은 환경을 제공하여 학업이나 업무에 집중할 수 있도록 돕습니다.</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-xl-3 d-flex align-items-stretch">
-                                <a href="/teamdetail">
-                                    <div class="icon-box mt-4 mt-xl-0 roomPicture3">
-                                        <!--                      <i class="bx bx-images"></i>-->
-                                        <img src="/assets/img/studyRoom/study%20room3.png" alt="스터드룸3 사진">
-                                        <h4>스터디룸 3번</h4>
-                                        <p>스터디룸은 학습이나 작업을 위한 전용 공간으로, 개별이나 그룹으로 사용될 수 있는 공간입니다.
-                                            주로 조용하고 집중하기 좋은 환경을 제공하여 학업이나 업무에 집중할 수 있도록 돕습니다.</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-xl-3 d-flex align-items-stretch">
-                                <a href="/teamdetail">
-                                    <div class="icon-box mt-4 mt-xl-0 roomPicture4">
-                                        <!--                      <i class="bx bx-images"></i>-->
-                                        <img src="/assets/img/studyRoom/study%20room4.png" alt="스터드룸4 사진">
-                                        <h4>스터디룸 4번</h4>
-                                        <p>스터디룸은 학습이나 작업을 위한 전용 공간으로, 개별이나 그룹으로 사용될 수 있는 공간입니다.
-                                            주로 조용하고 집중하기 좋은 환경을 제공하여 학업이나 업무에 집중할 수 있도록 돕습니다.</p>
                                     </div>
                                 </a>
                             </div>
@@ -179,5 +103,41 @@
             </div>
         </section><!-- End Why Us Section -->
     </main><!-- End #main -->
+    <!--modal1-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-body" class="modal-body" >
+                    내용부분
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" id="modalsucbtn" class="btn btn-primary"
+                            data-bs-target="#exampleModal2" data-bs-toggle="modal" data-bs-dismiss="modal">완료</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal2-->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel2">알림</h1>
+                    <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                </div>
+                <div id="modal-body2" class="modal-body" >
+                    내용부분
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modal2Button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </th:block>
 </html>

@@ -1,22 +1,68 @@
 package com.project.SnakeProject.controller;
 
 import com.project.SnakeProject.service.MemberService;
+import com.project.SnakeProject.service.impl.StudyGImgImpl;
+import com.project.SnakeProject.service.impl.StudyGInfoImpl;
+import com.project.SnakeProject.service.impl.StudyInInfoImpl;
 import com.project.SnakeProject.vo.MemberVo;
+import com.project.SnakeProject.vo.StudyGImgVo;
+import com.project.SnakeProject.vo.StudyGInfoVo;
+import com.project.SnakeProject.vo.StudyInInfoVo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HomeController {
     @Autowired
     MemberService memberService;
-    @GetMapping("/")
+    @Autowired
+    private StudyInInfoImpl studyInInfoImpl;
+    @Autowired
+    private StudyGInfoImpl studyGInfoImpl;
+    @Autowired
+    private StudyGImgImpl studyGImgImpl;
+
+    @RequestMapping("/")
     public String home(Model model){
+        List<StudyInInfoVo> SIItables = studyInInfoImpl.ViewStudyInInfo();
+        List<StudyGInfoVo> SGItables = studyGInfoImpl.ViewStudyGInfo();
+        List<StudyGImgVo> SGImgtables = studyGImgImpl.ViewStudyGImg();
+
+        List<List<StudyInInfoVo>> groupedSIItables = new ArrayList<>();
+        for (int i = 0; i < SIItables.size(); i += 6) {
+            int end = Math.min(i + 6, SIItables.size());
+            groupedSIItables.add(SIItables.subList(i, end));
+        }
+
+        model.addAttribute("ViewStudyInInfo", groupedSIItables);
+        model.addAttribute("ViewStudyGInfo", SGItables);
+        model.addAttribute("ViewStudyGImg", SGImgtables);
         model.addAttribute("title", "JAVA스터디");
         return "content/home";
+    }
+
+    @PostMapping("/updateSeat")
+    public ResponseEntity<Integer> updateSeat(Integer selectId) {
+        ResponseEntity<Integer> r = null;
+
+        int result = 0;
+        if(studyInInfoImpl.UpdateStudyInInfo(selectId) > 0) {
+            result = 1;
+        } else {
+            result = 0;
+        }
+        return new ResponseEntity<Integer>(result, HttpStatus.OK);
+
+//        return int(result, HttpStatus.OK);
     }
 
     @PostMapping("/login")
