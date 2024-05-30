@@ -6,12 +6,17 @@ import java.util.Date;
 
 @NoArgsConstructor
 public class MemberVo {
-    private String MemberId;
-    private String MemberPw;
-    private String MemberName;
-    private int MemberSex;
-    private String MemberPhone;
-    private Date MregDate;
+    String MemberId;
+    String MemberPw;
+    String MemberName;
+    int MemberSex;
+    String MemberPhone;
+    Date MregDate;
+
+    // CommunityVo에서 사용할 회원 이름 하나만 정의
+    public MemberVo(String memberName) {
+        MemberName = memberName;
+    }
 
     public MemberVo(String memberPw, String memberName, String memberPhone) {
         MemberPw = memberPw;

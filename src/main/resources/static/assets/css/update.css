@@ -247,7 +247,7 @@ li {
 .writecontent > a > h4 {
     border-bottom: 1px solid lightgray;
     padding: 10px;
-    margin-left: 45px;
+    /*margin-left: 45px;*/
     text-align: center;
 }
 
@@ -261,7 +261,7 @@ li {
 
 .writecontent {
     height: 300px;
-    margin-right: 50px;
+    /*margin-right: 50px;*/
 }
 
 span.acitve {

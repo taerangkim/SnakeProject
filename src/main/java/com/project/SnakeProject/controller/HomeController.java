@@ -1,9 +1,8 @@
 package com.project.SnakeProject.controller;
 
 import com.project.SnakeProject.service.MemberService;
-import com.project.SnakeProject.service.impl.StudyGImgImpl;
-import com.project.SnakeProject.service.impl.StudyGInfoImpl;
-import com.project.SnakeProject.service.impl.StudyInInfoImpl;
+import com.project.SnakeProject.service.impl.MemberServiceImpl;
+import com.project.SnakeProject.service.impl.StudyInfoServiceImpl;
 import com.project.SnakeProject.vo.MemberVo;
 import com.project.SnakeProject.vo.StudyGImgVo;
 import com.project.SnakeProject.vo.StudyGInfoVo;
@@ -23,19 +22,15 @@ import java.util.List;
 @Controller
 public class HomeController {
     @Autowired
-    MemberService memberService;
+    private MemberServiceImpl memberService;
     @Autowired
-    private StudyInInfoImpl studyInInfoImpl;
-    @Autowired
-    private StudyGInfoImpl studyGInfoImpl;
-    @Autowired
-    private StudyGImgImpl studyGImgImpl;
+    private StudyInfoServiceImpl studyInfoImpl;
 
     @RequestMapping("/")
     public String home(Model model){
-        List<StudyInInfoVo> SIItables = studyInInfoImpl.ViewStudyInInfo();
-        List<StudyGInfoVo> SGItables = studyGInfoImpl.ViewStudyGInfo();
-        List<StudyGImgVo> SGImgtables = studyGImgImpl.ViewStudyGImg();
+        List<StudyInInfoVo> SIItables = studyInfoImpl.ViewStudyInInfo();
+        List<StudyGInfoVo> SGItables = studyInfoImpl.ViewStudyGInfo();
+        List<StudyGImgVo> SGImgtables = studyInfoImpl.ViewStudyGImg();
 
         List<List<StudyInInfoVo>> groupedSIItables = new ArrayList<>();
         for (int i = 0; i < SIItables.size(); i += 6) {
@@ -55,7 +50,7 @@ public class HomeController {
         ResponseEntity<Integer> r = null;
 
         int result = 0;
-        if(studyInInfoImpl.UpdateStudyInInfo(selectId) > 0) {
+        if(studyInfoImpl.UpdateStudyInInfo(selectId) > 0) {
             result = 1;
         } else {
             result = 0;
