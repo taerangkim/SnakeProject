@@ -289,7 +289,6 @@
         const mytest = document.querySelector(".mytest");
 
         $(document).ready(function () {
-
             mytime.style.display = "none";
             mytest.style.display = "none";
 
@@ -302,6 +301,9 @@
                 mypage.style.display = "block";
                 mytime.style.display = "none";
                 mytest.style.display = "none";
+
+                const url = '/mypage?id=[[${session.userid}]]';
+                history.pushState(null, '', url);
             })
 
             mytimeBtn.addEventListener('click', function () {
@@ -313,9 +315,14 @@
                 mytime.style.display = "block";
                 mypage.style.display = "none";
                 mytest.style.display = "none";
+
+                const url = '/mypage?id=[[${session.userid}]]';
+                history.pushState(null, '', url);
             })
 
+
             mywriteBtn.addEventListener('click', function () {
+                // const urlParams = new URL(location.href).searchParams;
 
                 mypageBtn.classList.remove('active')
                 mytimeBtn.classList.remove('active')
@@ -324,6 +331,9 @@
                 mytest.style.display = "block";
                 mypage.style.display = "none";
                 mytime.style.display = "none";
+
+                const url = '/mypage?id=[[${session.userid}]]&pageGroup=1&groupCommunity=1';
+                history.pushState(null, '', url);
             })
         })
 
