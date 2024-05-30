@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/layout}">
 <head>
-    <title>Info Page</title>`
+    <title>Info Page</title>
 </head>
 <th:block layout:fragment="content">
     <div class="container-mypage-detail">
@@ -14,7 +14,7 @@
                 <div class="lnb_sec line">
                     <h1>마이페이지</h1>
                     <ul class="lnbnew">
-                        <li class="mypageBtn active"><a href="javascript:void(0);">개인 정보 수정eddddsfdf</a></li>
+                        <li class="mypageBtn active"><a href="javascript:void(0);">개인 정보 수정eddd</a></li>
                         <li class="mytimeBtn active"><a href="javascript:void(0);">시간 확인 및 충전</a></li>
                         <li class="mywriteBtn active"><a href="javascript:void(0)">작성한 글 확인</a></li>
                         <li>
@@ -104,70 +104,53 @@
 
             <!-- 작성한 글 확인 -->
             <div class="col-8 mytest">
-                <div class="row" id="item">
-                    <div class="col-6 mywrite">
-                        <div class="writecontent">
-                            <a href="/">
-                                <h4>글 제목</h4>
+                <th:block th:if="${community.size() != 0}">
+                    <div class="row" id="item">
+                        <div class="col-6 mywrite" th:each="List : ${community}">
+                            <div class="writecontent">
+                                <a href="/">
+                                    <h4 th:text="${List.getComTitle()}"></h4>
+                                </a>
+                                <table class="table">
+                                    <tr>
+                                        <th>작성자</th>
+                                        <td th:text="${List.getMemberVo().getMemberName()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>작성날짜</th>
+                                        <td th:text="${List.getComRegDate()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>카테고리</th>
+                                        <td th:text="${List.getCommunityCategoryVo().getComCateName()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>조회수</th>
+                                        <td th:text="${List.getComintoDate()}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-section">
+                        <button type="button" class="btn btn-light btn-before" onclick="firstActive()"><i class="bi bi-chevron-double-left"></i></button>
+                        <button type="button" class="btn btn-light btn-before" onclick="beforeActive()"><i class="bi bi-chevron-left"></i></button>
+                        <div class="btn-group" id="btn-group" role="group" aria-label="Second group">
 
-                            </a>
-                            <ul class="write1">
-                                <li>작성자 : test</li>
-                                <li>작성 날짜 : test</li>
-                                <li>카테고리 : test</li>
-                                <li>별점 : test</li>
-                            </ul>
+                        </div>
+                        <button type="button" class="btn btn-light btn-next" onclick="nextActive()"><i class="bi bi-chevron-right"></i></button>
+                        <button type="button" class="btn btn-light btn-next" onclick="lastActive()"><i class="bi bi-chevron-double-right"></i></button>
+                    </div>
+                </th:block>
+                <th:block th:if="${community.size() == 0}">
+                    <div class="row" id="item1">
+                        <div class="col-12 mywrite">
+                            <div class="text-center">
+                                <h1>작성하신 글이 없습니다</h1>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-6 mywrite">
-                        <div class="writecontent">
-                            <a href="/">
-                                <h4>글 제목</h4>
-                            </a>
-                            <ul class="write1">
-                                <li>작성자 : test</li>
-                                <li>작성 날짜 : test</li>
-                                <li>카테고리 : test</li>
-                                <li>별점 : test</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-6 mywrite">
-                        <div class="writecontent">
-                            <a href="/">
-                                <h4>글 제목</h4>
-                            </a>
-                            <ul class="write1">
-                                <li>작성자 : test</li>
-                                <li>작성 날짜 : test</li>
-                                <li>카테고리 : test</li>
-                                <li>별점 : test</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-6 mywrite">
-                        <div class="writecontent">
-                            <a href="/">
-                                <h4>글 제목</h4>
-                            </a>
-                            <ul class="write1">
-                                <li>작성자 : test</li>
-                                <li>작성 날짜 : test</li>
-                                <li>카테고리 : test</li>
-                                <li>별점 : test</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="btn-section">
-                    <button type="button" class="btn btn-light btn-before" onclick="firstActive()"><i class="bi bi-chevron-double-left"></i></button>
-                    <button type="button" class="btn btn-light btn-before" onclick="beforeActive()"><i class="bi bi-chevron-left"></i></button>
-                    <div class="btn-group" id="btn-group" role="group" aria-label="Second group">
-
-                    </div>
-                    <button type="button" class="btn btn-light btn-next" onclick="nextActive()"><i class="bi bi-chevron-right"></i></button>
-                    <button type="button" class="btn btn-light btn-next" onclick="lastActive()"><i class="bi bi-chevron-double-right"></i></button>
-                </div>
+                </th:block>
             </div>
         </div>
     </div>
@@ -303,12 +286,9 @@
 
         const mypage = document.querySelector(".mypage");
         const mytime = document.querySelector(".mytime");
-        const mywrite = document.querySelector(".mywrite");
-
         const mytest = document.querySelector(".mytest");
 
         $(document).ready(function () {
-
             mytime.style.display = "none";
             mytest.style.display = "none";
 
@@ -321,6 +301,9 @@
                 mypage.style.display = "block";
                 mytime.style.display = "none";
                 mytest.style.display = "none";
+
+                const url = '/mypage?id=[[${session.userid}]]';
+                history.pushState(null, '', url);
             })
 
             mytimeBtn.addEventListener('click', function () {
@@ -332,9 +315,14 @@
                 mytime.style.display = "block";
                 mypage.style.display = "none";
                 mytest.style.display = "none";
+
+                const url = '/mypage?id=[[${session.userid}]]';
+                history.pushState(null, '', url);
             })
 
+
             mywriteBtn.addEventListener('click', function () {
+                // const urlParams = new URL(location.href).searchParams;
 
                 mypageBtn.classList.remove('active')
                 mytimeBtn.classList.remove('active')
@@ -343,6 +331,9 @@
                 mytest.style.display = "block";
                 mypage.style.display = "none";
                 mytime.style.display = "none";
+
+                const url = '/mypage?id=[[${session.userid}]]&pageGroup=1&groupCommunity=1';
+                history.pushState(null, '', url);
             })
         })
 
