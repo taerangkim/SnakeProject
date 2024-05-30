@@ -2,8 +2,6 @@ const buttonEls = document.querySelectorAll('#btn-group .btn');
 const ActiveCategoryEl = document.querySelector('section.messageBoard .container .category .categoryName.active')
 const categoryNameEls = document.querySelectorAll('section.messageBoard .container .category .categoryName')
 
-
-
 // if(!ActiveCategoryEl) {
 //   categoryNames = Array.from(categoryNameEls)
 //   categoryNames[0].classList.add('active')
@@ -26,14 +24,9 @@ buttonEls.forEach(function(buttonEl) {
   })
 })
 
-
-
 function check() {
   console.log('체크')
 }
-
-
-
 
 categoryNameEls.forEach(function(categoryNameEl) {
   categoryNameEl.addEventListener('click', function() {
@@ -43,6 +36,7 @@ categoryNameEls.forEach(function(categoryNameEl) {
       categoryNameEl.classList.add('active')
       // console.log(categoryNameEl.innerText)
       // console.log((categoryNameEl.id).substr(10))
+      // window.location.href = `/messageBoard?category=${Number((categoryNameEl.id).substr(10))}&pageGroup=1&groupCommunity=1`;
       window.location.href = `/messageBoard?category=${Number((categoryNameEl.id).substr(10))}&pageGroup=1&groupCommunity=1`;
     }else {
       categoryNameEl.classList.add('active')
@@ -53,8 +47,6 @@ categoryNameEls.forEach(function(categoryNameEl) {
   })
 })
 
-
-
 const contentsEls = document.querySelectorAll('section.messageBoard .container .contents-group .content')
 
 contentsEls.forEach(function (contentsEl) {
@@ -63,7 +55,6 @@ contentsEls.forEach(function (contentsEl) {
     window.location.href = "/post";
   })
 })
-
 
 function beforeActive() {
   // const activeButton = document.querySelector('#btn-group .btn.active')
@@ -87,7 +78,6 @@ function beforeActive() {
   // console.log(activeButton.innerText - 1)
 }
 
-
 function nextActive() {
   // 현재 url의 pageGroup의 값을 가져와서 1이 아니면 그 값에 1을 추가한다. (일단 groupCommunity는 그냥 냅둔다.)
   const urlParams = new URL(location.href).searchParams;
@@ -97,12 +87,10 @@ function nextActive() {
                           &groupCommunity=${(Number(urlParams.get("pageGroup")) * 3) + 1}`;
 }
 
-
 function firstActive() {
   const urlParams = new URL(location.href).searchParams;
   window.location.href = `/messageBoard?category=${urlParams.get("category")}&pageGroup=1&groupCommunity=1`;
 }
-
 
 function lastActive(threeList, twoList) {
   //3차원 배열(ViewpageTables)의 사이즈를 구하고 가장큰값에 해당하는 값을 pageGroup에 넣고 groupCommunity은
