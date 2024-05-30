@@ -36,6 +36,7 @@ public class MypageController {
             community.addAll(memberService.MyPageCommunity(id));
             model.addAttribute("community", community);
 
+            model.addAttribute("title", "마이페이지");
             return "content/mypage";
         } else {
             model.addAttribute("msg", "비정상 접근입니다.");

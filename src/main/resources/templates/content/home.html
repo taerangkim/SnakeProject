@@ -66,9 +66,16 @@
                             <!--                            <div th:text="${ViewStudyInInfo}"></div>-->
                             <div class="row" th:each="studyInInfogroup : ${ViewStudyInInfo}">
                                 <th:block th:each="studyInInfo : ${studyInInfogroup}">
-                                    <span th:class="${studyInInfo.SeatUseState} == 'Y' ? 'seat selectedSeat' : 'seat' "
-                                          th:id="'seat' + ${studyInInfo.SIINum}"
-                                          data-bs-toggle="modal" data-bs-target="#exampleModal"></span>
+                                    <th:block th:if="${session.userid} != null">
+                                        <span th:class="${studyInInfo.SeatUseState} == 'Y' ? 'seat selectedSeat' : 'seat' "
+                                              th:id="'seat' + ${studyInInfo.SIINum}"
+                                              data-bs-toggle="modal" data-bs-target="#exampleModal"></span>
+                                    </th:block>
+                                    <th:block th:if="${session.userid} == null">
+                                        <span th:class="${studyInInfo.SeatUseState} == 'Y' ? 'seat selectedSeat' : 'seat' "
+                                              th:id="'seat' + ${studyInInfo.SIINum}"
+                                              data-bs-toggle="modal" data-bs-target="#exampleModal3"></span>
+                                    </th:block>
                                 </th:block>
                             </div>
                         </div>
@@ -135,6 +142,23 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="modal2Button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal3 -->
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel3">알림</h1>
+                    <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                </div>
+                <div id="modal-body3" class="modal-body" >
+                    로그인 후 이용이 가능합니다.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modal3Button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>
