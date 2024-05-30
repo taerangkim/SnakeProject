@@ -1,12 +1,14 @@
 package com.project.SnakeProject.controller;
 
-import com.project.SnakeProject.service.StudyPareService;
+import com.project.SnakeProject.service.impl.StudyPareServiceImpl;
 import com.project.SnakeProject.vo.StudyGPareVo;
 import com.project.SnakeProject.vo.StudyInPareVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +17,9 @@ import java.util.List;
 public class detailController {
 
     @Autowired
-    private StudyPareService studyPareService;
+    private StudyPareServiceImpl studyPareService;
 
-    @GetMapping("/detail")
+    @RequestMapping(value="/detail", method = RequestMethod.GET)
     public String detail(Model model) throws Exception {
         List<StudyInPareVo> typeList = new ArrayList<>();
         List<StudyInPareVo> selectList1 = new ArrayList<>();

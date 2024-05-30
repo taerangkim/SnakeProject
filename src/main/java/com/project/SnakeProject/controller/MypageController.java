@@ -1,6 +1,9 @@
 package com.project.SnakeProject.controller;
 
 import com.project.SnakeProject.service.MemberService;
+import com.project.SnakeProject.service.impl.MemberServiceImpl;
+import com.project.SnakeProject.vo.CommunityCategoryVo;
+import com.project.SnakeProject.vo.CommunityVo;
 import com.project.SnakeProject.vo.MemberVo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -9,19 +12,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class MypageController {
     @Autowired
-    private MemberService memberService;
+    private MemberServiceImpl memberService;
 
     @RequestMapping(value="/mypage", method = RequestMethod.GET)
     public String mypage(String id, Model model, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         if(session.getAttribute("userid") != null) {
+            // 개인정보 가져오는 service
             MemberVo member = memberService.selectInfo(id);
             model.addAttribute("data", member);
+
+            // 개인 좌석 시간 및 룸 시간 충전
+
+            // 개인이 작성한 글 보여주는 게시판
+            List<CommunityVo> community = new ArrayList<>();
+            community.addAll(memberService.MyPageCommunity(id));
+            model.addAttribute("community", community);
 
             return "content/mypage";
         } else {
